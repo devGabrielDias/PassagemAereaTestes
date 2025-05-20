@@ -1,7 +1,0 @@
-GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-passagem-aerea,com.senai.controller,SistemaReservas,0,226,0,6,0,44,0,22,0,19
-passagem-aerea,com.senai.model,Passageiro,26,176,4,20,8,39,7,17,3,9
-passagem-aerea,com.senai.model,Voo,37,102,1,7,11,30,6,15,5,12
-passagem-aerea,com.senai.model,Aviao,22,68,0,4,7,22,4,11,4,9
-passagem-aerea,com.senai.model,Reserva,22,84,1,11,4,28,3,12,2,7
-passagem-aerea,com.senai,MainApp,346,0,26,0,116,0,33,0,16,0
