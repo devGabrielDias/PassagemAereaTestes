@@ -1,6 +1,54 @@
 # Sistema de Passagens Aéreas
 
-Este é um sistema de gerenciamento de passagens aéreas desenvolvido em Java seguindo o padrão de arquitetura MVC (Model-View-Controller).
+Este projeto é a resolução de uma atividade acadêmica que propõe o desenvolvimento de um sistema de passagens aéreas utilizando Java e arquitetura MVC, com foco em testes automatizados e cobertura de código.
+
+## O que a atividade resolve?
+O sistema implementa as principais regras de negócio de uma companhia aérea, permitindo:
+- Cadastro e validação de passageiros
+- Cadastro de aviões
+- Cadastro de voos
+- Reserva de passagens
+- Listagem de entidades
+
+## Casos de Uso Atendidos
+Abaixo estão os casos de teste/casos de uso propostos na atividade e que foram resolvidos neste sistema:
+
+### 1. Validação de Passageiros
+- Testar CPF válido (exemplo: "52998224725") → Deve retornar true
+- Testar CPF inválido (exemplo: "12345678900") → Deve retornar false
+- Testar e-mail válido (exemplo: "ana.souza@email.com") → Deve retornar true
+- Testar e-mail inválido (exemplo: "ana.souza@com") → Deve retornar false
+
+### 2. Cadastro de Passageiros
+- Cadastrar passageiro com dados válidos → Deve adicionar à lista
+- Tentar cadastrar passageiro com CPF inválido → Deve falhar ou lançar exceção
+
+### 3. Cadastro de Aviões
+- Cadastrar avião com modelo e capacidade válidos → Deve ser salvo corretamente
+- Tentar cadastrar avião com capacidade zero → Deve lançar exceção ou falhar
+- Tentar cadastrar avião com capacidade negativa → Deve lançar exceção ou falhar
+
+### 4. Cadastro de Voos
+- Cadastrar voo com origem, destino, data e avião válido → Deve ser salvo corretamente
+- Tentar cadastrar voo sem avião associado → Deve lançar exceção ou falhar
+
+### 5. Reserva de Passagens
+- Criar reserva com vagas disponíveis → Deve ser realizada com sucesso
+- Criar reserva quando todas as vagas estiverem ocupadas → Deve falhar ou lançar exceção
+- Criar reserva duplicada para o mesmo passageiro e voo → Deve impedir ou notificar (se implementado)
+
+### 6. Listagens
+- Listar passageiros após 3 cadastros → Deve retornar 3 registros
+- Listar aviões após 2 cadastros → Deve retornar 2 registros
+- Listar voos após 1 cadastro → Deve retornar 1 registro com dados do avião
+- Listar reservas após 2 registros → Deve retornar 2 reservas com passageiro e voo
+
+## Testes Automatizados
+Todos os casos acima são validados por testes automatizados, garantindo a cobertura e a robustez do sistema.
+
+---
+
+Sinta-se à vontade para clonar, rodar e adaptar este projeto para fins acadêmicos ou de aprendizado!
 
 ## Estrutura do Projeto
 
