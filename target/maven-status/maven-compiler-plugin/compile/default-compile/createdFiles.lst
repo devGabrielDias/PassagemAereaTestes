@@ -1,0 +1,6 @@
+com\senai\model\Reserva.class
+com\senai\model\Voo.class
+com\senai\controller\SistemaReservas.class
+com\senai\model\Aviao.class
+com\senai\MainApp.class
+com\senai\model\Passageiro.class

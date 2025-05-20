@@ -1,0 +1,5 @@
+com\senai\model\ReservaTest.class
+com\senai\model\PassageiroTest.class
+com\senai\model\AviaoTest.class
+com\senai\controller\SistemaReservasTest.class
+com\senai\model\VooTest.class

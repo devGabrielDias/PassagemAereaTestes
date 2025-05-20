@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MainApp.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">passagem-aerea</a> &gt; <a href="index.source.html" class="el_package">com.senai</a> &gt; <span class="el_source">MainApp.java</span></div><h1>MainApp.java</h1><pre class="source lang-java linenums">package com.senai;
+
+import com.senai.controller.SistemaReservas;
+import com.senai.model.*;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.List;
+import java.util.Scanner;
+
+<span class="nc" id="L12">public class MainApp {</span>
+<span class="nc" id="L13">    private static final SistemaReservas sistema = new SistemaReservas();</span>
+<span class="nc" id="L14">    private static final Scanner scanner = new Scanner(System.in);</span>
+<span class="nc" id="L15">    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;dd/MM/yyyy HH:mm&quot;);</span>
+
+    public static void main(String[] args) {
+<span class="nc" id="L18">        boolean executando = true;</span>
+<span class="nc bnc" id="L19" title="All 2 branches missed.">        while (executando) {</span>
+<span class="nc" id="L20">            exibirMenu();</span>
+<span class="nc" id="L21">            int opcao = lerInteiro(&quot;Digite a opção desejada: &quot;);</span>
+<span class="nc" id="L22">            executando = processarOpcao(opcao);</span>
+<span class="nc" id="L23">        }</span>
+<span class="nc" id="L24">        scanner.close();</span>
+<span class="nc" id="L25">    }</span>
+
+    private static void exibirMenu() {
+<span class="nc" id="L28">        System.out.println(&quot;\n=== Sistema de Passagens Aéreas ===&quot;);</span>
+<span class="nc" id="L29">        System.out.println(&quot;1 - Cadastrar passageiro&quot;);</span>
+<span class="nc" id="L30">        System.out.println(&quot;2 - Listar passageiros&quot;);</span>
+<span class="nc" id="L31">        System.out.println(&quot;3 - Cadastrar avião&quot;);</span>
+<span class="nc" id="L32">        System.out.println(&quot;4 - Listar aviões&quot;);</span>
+<span class="nc" id="L33">        System.out.println(&quot;5 - Cadastrar voo&quot;);</span>
+<span class="nc" id="L34">        System.out.println(&quot;6 - Listar voos&quot;);</span>
+<span class="nc" id="L35">        System.out.println(&quot;7 - Reservar passagem&quot;);</span>
+<span class="nc" id="L36">        System.out.println(&quot;8 - Listar reservas&quot;);</span>
+<span class="nc" id="L37">        System.out.println(&quot;9 - Sair&quot;);</span>
+<span class="nc" id="L38">    }</span>
+
+    private static boolean processarOpcao(int opcao) {
+        try {
+<span class="nc bnc" id="L42" title="All 10 branches missed.">            switch (opcao) {</span>
+<span class="nc" id="L43">                case 1 -&gt; cadastrarPassageiro();</span>
+<span class="nc" id="L44">                case 2 -&gt; listarPassageiros();</span>
+<span class="nc" id="L45">                case 3 -&gt; cadastrarAviao();</span>
+<span class="nc" id="L46">                case 4 -&gt; listarAvioes();</span>
+<span class="nc" id="L47">                case 5 -&gt; cadastrarVoo();</span>
+<span class="nc" id="L48">                case 6 -&gt; listarVoos();</span>
+<span class="nc" id="L49">                case 7 -&gt; reservarPassagem();</span>
+<span class="nc" id="L50">                case 8 -&gt; listarReservas();</span>
+                case 9 -&gt; {
+<span class="nc" id="L52">                    System.out.println(&quot;Saindo do sistema...&quot;);</span>
+<span class="nc" id="L53">                    return false;</span>
+                }
+<span class="nc" id="L55">                default -&gt; System.out.println(&quot;Opção inválida!&quot;);</span>
+            }
+<span class="nc" id="L57">        } catch (Exception e) {</span>
+<span class="nc" id="L58">            System.out.println(&quot;Erro: &quot; + e.getMessage());</span>
+<span class="nc" id="L59">        }</span>
+<span class="nc" id="L60">        return true;</span>
+    }
+
+    private static void cadastrarPassageiro() {
+<span class="nc" id="L64">        System.out.println(&quot;\n=== Cadastro de Passageiro ===&quot;);</span>
+<span class="nc" id="L65">        String nome = lerString(&quot;Nome: &quot;);</span>
+<span class="nc" id="L66">        String cpf = lerString(&quot;CPF: &quot;);</span>
+<span class="nc" id="L67">        String email = lerString(&quot;Email: &quot;);</span>
+
+<span class="nc" id="L69">        Passageiro passageiro = sistema.cadastrarPassageiro(nome, cpf, email);</span>
+<span class="nc" id="L70">        System.out.println(&quot;Passageiro cadastrado com sucesso! ID: &quot; + passageiro.getId());</span>
+<span class="nc" id="L71">    }</span>
+
+    private static void listarPassageiros() {
+<span class="nc" id="L74">        System.out.println(&quot;\n=== Lista de Passageiros ===&quot;);</span>
+<span class="nc" id="L75">        List&lt;Passageiro&gt; passageiros = sistema.listarPassageiros();</span>
+<span class="nc bnc" id="L76" title="All 2 branches missed.">        if (passageiros.isEmpty()) {</span>
+<span class="nc" id="L77">            System.out.println(&quot;Nenhum passageiro cadastrado.&quot;);</span>
+        } else {
+<span class="nc" id="L79">            passageiros.forEach(System.out::println);</span>
+        }
+<span class="nc" id="L81">    }</span>
+
+    private static void cadastrarAviao() {
+<span class="nc" id="L84">        System.out.println(&quot;\n=== Cadastro de Avião ===&quot;);</span>
+<span class="nc" id="L85">        String modelo = lerString(&quot;Modelo: &quot;);</span>
+<span class="nc" id="L86">        int capacidade = lerInteiro(&quot;Capacidade: &quot;);</span>
+<span class="nc" id="L87">        String fabricante = lerString(&quot;Fabricante: &quot;);</span>
+
+<span class="nc" id="L89">        Aviao aviao = sistema.cadastrarAviao(modelo, capacidade, fabricante);</span>
+<span class="nc" id="L90">        System.out.println(&quot;Avião cadastrado com sucesso! ID: &quot; + aviao.getId());</span>
+<span class="nc" id="L91">    }</span>
+
+    private static void listarAvioes() {
+<span class="nc" id="L94">        System.out.println(&quot;\n=== Lista de Aviões ===&quot;);</span>
+<span class="nc" id="L95">        List&lt;Aviao&gt; avioes = sistema.listarAvioes();</span>
+<span class="nc bnc" id="L96" title="All 2 branches missed.">        if (avioes.isEmpty()) {</span>
+<span class="nc" id="L97">            System.out.println(&quot;Nenhum avião cadastrado.&quot;);</span>
+        } else {
+<span class="nc" id="L99">            avioes.forEach(System.out::println);</span>
+        }
+<span class="nc" id="L101">    }</span>
+
+    private static void cadastrarVoo() {
+<span class="nc" id="L104">        System.out.println(&quot;\n=== Cadastro de Voo ===&quot;);</span>
+<span class="nc" id="L105">        String origem = lerString(&quot;Origem: &quot;);</span>
+<span class="nc" id="L106">        String destino = lerString(&quot;Destino: &quot;);</span>
+<span class="nc" id="L107">        LocalDateTime dataHora = lerDataHora(&quot;Data e Hora (dd/MM/yyyy HH:mm): &quot;);</span>
+
+<span class="nc" id="L109">        listarAvioes();</span>
+<span class="nc" id="L110">        int idAviao = lerInteiro(&quot;ID do Avião: &quot;);</span>
+<span class="nc" id="L111">        Aviao aviao = sistema.buscarAviaoPorId(idAviao);</span>
+<span class="nc bnc" id="L112" title="All 2 branches missed.">        if (aviao == null) {</span>
+<span class="nc" id="L113">            throw new IllegalArgumentException(&quot;Avião não encontrado!&quot;);</span>
+        }
+
+<span class="nc" id="L116">        Voo voo = sistema.cadastrarVoo(origem, destino, dataHora, aviao);</span>
+<span class="nc" id="L117">        System.out.println(&quot;Voo cadastrado com sucesso! ID: &quot; + voo.getId());</span>
+<span class="nc" id="L118">    }</span>
+
+    private static void listarVoos() {
+<span class="nc" id="L121">        System.out.println(&quot;\n=== Lista de Voos ===&quot;);</span>
+<span class="nc" id="L122">        List&lt;Voo&gt; voos = sistema.listarVoos();</span>
+<span class="nc bnc" id="L123" title="All 2 branches missed.">        if (voos.isEmpty()) {</span>
+<span class="nc" id="L124">            System.out.println(&quot;Nenhum voo cadastrado.&quot;);</span>
+        } else {
+<span class="nc" id="L126">            voos.forEach(System.out::println);</span>
+        }
+<span class="nc" id="L128">    }</span>
+
+    private static void reservarPassagem() {
+<span class="nc" id="L131">        System.out.println(&quot;\n=== Reserva de Passagem ===&quot;);</span>
+<span class="nc" id="L132">        listarPassageiros();</span>
+<span class="nc" id="L133">        int idPassageiro = lerInteiro(&quot;ID do Passageiro: &quot;);</span>
+<span class="nc" id="L134">        Passageiro passageiro = sistema.buscarPassageiroPorId(idPassageiro);</span>
+<span class="nc bnc" id="L135" title="All 2 branches missed.">        if (passageiro == null) {</span>
+<span class="nc" id="L136">            throw new IllegalArgumentException(&quot;Passageiro não encontrado!&quot;);</span>
+        }
+
+<span class="nc" id="L139">        listarVoos();</span>
+<span class="nc" id="L140">        int idVoo = lerInteiro(&quot;ID do Voo: &quot;);</span>
+<span class="nc" id="L141">        Voo voo = sistema.buscarVooPorId(idVoo);</span>
+<span class="nc bnc" id="L142" title="All 2 branches missed.">        if (voo == null) {</span>
+<span class="nc" id="L143">            throw new IllegalArgumentException(&quot;Voo não encontrado!&quot;);</span>
+        }
+
+<span class="nc" id="L146">        Reserva reserva = sistema.criarReserva(passageiro, voo);</span>
+<span class="nc" id="L147">        System.out.println(&quot;Reserva realizada com sucesso! ID: &quot; + reserva.getId());</span>
+<span class="nc" id="L148">    }</span>
+
+    private static void listarReservas() {
+<span class="nc" id="L151">        System.out.println(&quot;\n=== Lista de Reservas ===&quot;);</span>
+<span class="nc" id="L152">        List&lt;Reserva&gt; reservas = sistema.listarReservas();</span>
+<span class="nc bnc" id="L153" title="All 2 branches missed.">        if (reservas.isEmpty()) {</span>
+<span class="nc" id="L154">            System.out.println(&quot;Nenhuma reserva cadastrada.&quot;);</span>
+        } else {
+<span class="nc" id="L156">            reservas.forEach(System.out::println);</span>
+        }
+<span class="nc" id="L158">    }</span>
+
+    private static String lerString(String mensagem) {
+<span class="nc" id="L161">        System.out.print(mensagem);</span>
+<span class="nc" id="L162">        return scanner.nextLine();</span>
+    }
+
+    private static int lerInteiro(String mensagem) {
+        while (true) {
+            try {
+<span class="nc" id="L168">                System.out.print(mensagem);</span>
+<span class="nc" id="L169">                return Integer.parseInt(scanner.nextLine());</span>
+<span class="nc" id="L170">            } catch (NumberFormatException e) {</span>
+<span class="nc" id="L171">                System.out.println(&quot;Por favor, digite um número válido.&quot;);</span>
+<span class="nc" id="L172">            }</span>
+        }
+    }
+
+    private static LocalDateTime lerDataHora(String mensagem) {
+        while (true) {
+            try {
+<span class="nc" id="L179">                System.out.print(mensagem);</span>
+<span class="nc" id="L180">                String dataHoraStr = scanner.nextLine();</span>
+<span class="nc" id="L181">                return LocalDateTime.parse(dataHoraStr, formatter);</span>
+<span class="nc" id="L182">            } catch (DateTimeParseException e) {</span>
+<span class="nc" id="L183">                System.out.println(&quot;Formato inválido. Use dd/MM/yyyy HH:mm&quot;);</span>
+<span class="nc" id="L184">            }</span>
+        }
+    }
+} 
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
